@@ -1,4 +1,5 @@
 vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
+// ISF
 
 //******** Common Code Begins ********
 
@@ -22,20 +23,16 @@ vec2 U = _xy;
 
 vec4 renderPassA() {
     #undef iChannel0
-    #undef iChannel1
-    #undef iChannel2
     #undef iChannel3
 
     #define iChannel0 BuffC
-    #define iChannel1 BuffC
-    #define iChannel2 BuffC
     #define iChannel3 BuffA
 
     /* if (length(_uv) < 0.2) { */
     /*     return _loadUserImage(); */
     /* } */
 
-    if (int(FRAMECOUNT)%2<1) {
+    if (int(FRAMECOUNT)%2 < 0) {
         Q = vec4(0);
         for (int x = -1; x <= 1; x++)
         for (int y = -1; y <= 1; y++)
@@ -64,7 +61,7 @@ vec4 renderPassA() {
         if (x!=0||y!=0)
         {
             vec2 u = vec2(x,y);
-            vec4 a = A(U+u), b = B(U+u), d = D(U+u);
+            vec4 a = A(U+u), d = D(U+u);
             u = (u)/dot(u,u);
             Q.xy -= q.w*0.125*(-d.w*a.w+a.w*(a.w*a.z-1.-3.*a.w))*u;
             Q.z  -= q.w*0.125*a.w*dot(u,a.xy-q.xy);
@@ -74,7 +71,9 @@ vec4 renderPassA() {
     }
 
 
-    Q.xy *= clamp((Slider2 + syn_BassHits * Slider3), 0, 1.01);
+    // Brightness
+    Q.xy *= clamp((Slider2 + syn_BassHits * 0), 0, 1.01);
+
     return Q;
 }
 
@@ -83,12 +82,8 @@ vec4 renderPassA() {
 
 vec4 renderPassB () {
     #undef iChannel0
-    #undef iChannel1
-    #undef iChannel2
     #undef iChannel3
     #define iChannel0 BuffA
-    #define iChannel1 BuffC
-    #define iChannel2 BuffC
     #define iChannel3 BuffD
 
     vec4 a = A(U);
@@ -99,7 +94,14 @@ vec4 renderPassB () {
 
     if (length(Q.xy)>0.0)
     Q.xy =  0.2 * normalize(Q.xy)*Q.w;
+
+    Q.xy = mix(Q.xy, (0.5 - _loadUserImage().xy), 0.1 * syn_BassHits);
+    /* Q.xy += (0.5 - _noise(_uvc * 10)) * 0.1 * Slider3; */
+    /* Q.z += (0.5 - _noise(_uvc * 10)) * 0.1 * Slider3; */
+
     return Q;
+
+
 }
 
 
@@ -107,12 +109,8 @@ vec4 renderPassB () {
 
 vec4 renderPassC () {
     #undef iChannel0
-    #undef iChannel1
-    #undef iChannel2
     #undef iChannel3
     #define iChannel0 BuffA
-    #define iChannel1 BuffC
-    #define iChannel2 BuffC
     #define iChannel3 BuffB
 
     if (int(FRAMECOUNT)%2<1) {
@@ -144,7 +142,7 @@ vec4 renderPassC () {
         if (x!=0||y!=0)
         {
             vec2 u = vec2(x,y);
-            vec4 a = A(U+u), b = B(U+u), d = D(U+u);
+            vec4 a = A(U+u), d = D(U+u);
             u = (u)/dot(u,u);
             Q.xy -= q.w*0.125*(-d.w*a.w+a.w*(a.w*a.z-1.-3.*a.w))*u;
             Q.z  -= q.w*0.125*a.w*dot(u,a.xy-q.xy);
@@ -163,12 +161,8 @@ vec4 renderPassC () {
 
 vec4 renderPassD () {
     #undef iChannel0
-    #undef iChannel1
-    #undef iChannel2
     #undef iChannel3
     #define iChannel0 BuffC
-    #define iChannel1 BuffC
-    #define iChannel2 BuffC
     #define iChannel3 BuffB
 
     vec4 a = A(U);
@@ -179,6 +173,7 @@ vec4 renderPassD () {
 
     if (length(Q.xy)>0.)
     Q.xy = .2*normalize(Q.xy)*Q.w;
+
     return Q;
 }
 
@@ -194,20 +189,34 @@ vec4 renderPassD () {
 
 vec4 renderMainImage () {
     #undef iChannel0
-    #undef iChannel1
-    #undef iChannel2
     #undef iChannel3
     #define iChannel0 BuffA
     #define iChannel1 BuffB
     #define iChannel2 BuffC
     #define iChannel3 BuffD
 
+    /* if (_uv.x < 0.5) { */
+    /*     if (_uv.y < 0.5) { */
+    /* return B(U); */
+    /*     } */
+    /*     else { */
+    /*         return B(U); */
+    /*     } */
+    /* } else { */
+    /*     if (_uv.y < 0.5) { */
+    /*         return vec4(A(U).w); */
+    /*     } */
+    /*     else { */
+    /*         return vec4(B(U).w); */
+    /*     } */
+    /* } */
+
     float a = 0.2;
     float b = 1.5;
     Q = Slider1 * 10.0 *sin(A(U).wwww*(
                 /* vec4(1,2,3,4) */
-                0.2 + 0.2 * mix(vec4(0), _loadUserImage(), syn_Level)
-            ));
+                0.2 + 0.5 * mix(vec4(0), _loadUserImage(), syn_Level * 0.5 + 0.5)
+            )) * pow((syn_Level + B(U)), vec4(2));
 
     return Q;
 }
