@@ -1,4 +1,3 @@
-vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 
 
 			//******** BuffA Code Begins ********
@@ -26,7 +25,7 @@ vec4 iMouse = vec4(MouseXY*RENDERSIZE, MouseClick, MouseClick);
 #define keyTex _loadUserImage();
 #define KEY_I texture(image5,vec2((105.5-32.0)/256.0,(0.5+0.0)/3.0)).x
 
-float SPIN = syn_BassHits * 5 + SLIDER5;
+float SPIN = CURL_REACT * syn_BassHits * 5 + CURL_ADD;
 float ang = 2.0*3.1415926535/float(SPIN);
 mat2 m = mat2(cos(ang),sin(ang),-sin(ang),cos(ang));
 mat2 mh = mat2(cos(ang*0.5),sin(ang*0.5),-sin(ang*0.5),cos(ang*0.5));
@@ -58,8 +57,10 @@ vec4 renderPassA() {
     float rnd = randS(vec2(float(FRAMECOUNT)/Res.x,0.5/Res1.y)).x;
 
     vec2 b = vec2(cos(ang*rnd),sin(ang*rnd));
-    vec2 v=vec2(0);
-    float bbMax=(1.0 + SLIDER4) * 0.7 *Res.y; bbMax*=bbMax;
+    vec2 v = _rotate(BIAS.yx, PI/2 );
+
+    /* vec2 v= -  0.5* vec2(_uvc.y,  _uvc.x); */
+    float bbMax=(1.0 + 0.0) * 0.7 *Res.y; bbMax*=bbMax;
     for(int l=0;l<20;l++)
     {
         if ( dot(b,b) > bbMax ) break;
@@ -74,7 +75,7 @@ vec4 renderPassA() {
             v+=p.yx*getRot(pos+p,-mh*b);
 #else
             // this is faster but works only for odd SPIN
-            v+=p.yx*getRot(pos+p,b) * (1 + SLIDER6 * syn_Hits);
+            v+=p.yx*getRot(pos+p,b) * (1 + SPIN_REACT * syn_HighHits);
 #endif
             p = m*p;
         }
@@ -88,28 +89,35 @@ vec4 renderPassA() {
     fragColor.xy += (0.01*scr.xy / (dot(scr,scr)/0.1+0.3));
 
     /* if (length(_uvc.xy) < 0.2) { */
-    fragColor.xyz = mix(fragColor.xyz,
-            img.xyz,
-            fragColor.w
-            );
+    fragColor.xyz = mix(fragColor.xyz * (1.0 + FEEDBACK * syn_BassHits),
+        img.xyz,
+        fragColor.w * dot(img, img) / 3
+    );
+
             /* max(max(img.z, img.y), img.z)); */
     /* } */
 
 
     if (_uv.x < 0.015 || _uv.y < 0.05 ||1 - _uv.x <0.015 || 1 - _uv.y < 0.05) {
-        fragColor.xyzw *= 0.9;
+        fragColor.xyzw *= 0.94;
     }
 
     vec3 hsv = _rgb2hsv(fragColor.xyz);
     fragColor.w = mix(fragColor.w,
         syn_BassHits,
-     pow(10, SLIDER1 * -2));
-    fragColor.w *= SLIDER2 * SLIDER2;
+     pow(10, (MEDIA_ATTACK) * -2));
+    fragColor.w *= MEDIA_DECAY;
+    fragColor.w += BUMP;
 
     if(FRAMECOUNT<=4 || RESET == 1) {
-        fragColor=_loadUserImage();
+        fragColor = _loadUserImage();
         fragColor.w = 0.0;
     }
+
+    float hue = atan(fragColor.x / fragColor.y);
+
+    float r = length(fragColor.xy);
+
 	return fragColor;
  }
 
@@ -170,7 +178,7 @@ vec4 renderMainImage() {
 
     vec3 hsv = _rgb2hsv(fragColor.xyz);
     vec3 rgb = _hsv2rgb(vec3(hsv.x, 1.0, 1.0));
-    fragColor.xyz = mix(fragColor.xyz, rgb, spec * SLIDER3);
+    fragColor.xyz = mix(fragColor.xyz, rgb, spec * LIGHT);
 
     /* fragColor = mix(fragColor, fragColor*diff+spec, spec); */
     /* fragColor = mix(fragColor, fragColor, spec); */

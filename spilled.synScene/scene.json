@@ -4,56 +4,63 @@
 		{
 			"DEFAULT" : 0,
 			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "MouseXY",
-			"TYPE" : "xy",
-			"UI_GROUP" : "defaults"
-		},
-		{
-			"DEFAULT" : 0,
-			"DESCRIPTION" : "",
-			"MAX" : 1,
-			"MIN" : 0,
-			"NAME" : "MouseClick",
-			"TYPE" : "toggle",
-			"UI_GROUP" : "defaults"
+			"MAX" : 3,
+			"MIN" : -3,
+            "DEFAULT": 0,
+			"NAME" : "BIAS",
+			"TYPE" : "xy"
 		},
 		{
 			"DESCRIPTION" : "",
 			"NAME" : "RESET",
-			"TYPE" : "bang",
-			"UI_GROUP" : "defaults"
+			"TYPE" : "bang"
 		},
 		{
-			"NAME" : "SLIDER1",
+			"NAME" : "FEEDBACK",
+			"TYPE" : "knob",
+            "MIN": 0.0,
+            "MAX": 0.05,
+            "DEFAULT": 0
+		},
+		{
+			"NAME" : "MEDIA_ATTACK",
+			"TYPE" : "slider",
+            "DEFAULT": 0.1
+		},
+		{
+			"NAME" : "MEDIA_DECAY",
+			"TYPE" : "slider",
+            "DEFAULT": 0.9,
+            "MIN": 0.
+		},
+		{
+			"NAME" : "LIGHT",
 			"TYPE" : "slider"
 		},
 		{
-			"NAME" : "SLIDER2",
-			"TYPE" : "slider"
+			"NAME" : "CURL_REACT",
+			"TYPE" : "slider",
+            "MAX": 5.0,
+			"UI_GROUP" : "curl"
 		},
 		{
-			"NAME" : "SLIDER3",
-			"TYPE" : "slider"
-		},
-		{
-			"NAME" : "SLIDER4",
-			"TYPE" : "slider"
-		},
-		{
-			"NAME" : "SLIDER5",
+			"NAME" : "CURL_ADD",
 			"TYPE" : "slider",
             "MIN": 3,
             "MAX": 15,
-            "DEFAULT": 5
+            "DEFAULT": 5,
+			"UI_GROUP" : "curl"
 		},
 		{
-			"NAME" : "SLIDER6",
-			"TYPE" : "slider",
+			"NAME" : "SPIN_REACT",
+			"TYPE" : "knob",
             "MIN": 0,
             "MAX": 2,
             "DEFAULT": 1
+		},
+		{
+			"NAME" : "BUMP",
+			"TYPE" : "bang"
 		}
 	],
 	"CREDIT" : "flockaroo",
