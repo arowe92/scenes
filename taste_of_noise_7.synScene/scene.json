@@ -1,0 +1,34 @@
+{
+	"CONTROLS" :
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "leon",
+	"DESCRIPTION" : "Result of experimentation with organic patterns",
+	"IMAGE_PATH" : "thumbnail.png",
+	"PASSES" :
+	[
+		{
+			"FLOAT" : true,
+			"TARGET" : "BuffA"
+		}
+	],
+	"TITLE" : "Taste of Noise 7"
+}

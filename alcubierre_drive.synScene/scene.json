@@ -1,0 +1,38 @@
+{
+	"CONTROLS" : 
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "grevel",
+	"DESCRIPTION" : "Visualisation of alcubierre drive (read the comments in the code)",
+	"HEIGHT" : 720,
+	"IMAGE_PATH" : "alcubierre_drive.png",
+	"PASSES" : 
+	[
+		{
+			"FLOAT" : true,
+			"HEIGHT" : 720,
+			"TARGET" : "BuffA",
+			"WIDTH" : 1280
+		}
+	],
+	"TITLE" : "alcubierre drive",
+	"WIDTH" : 1280
+}

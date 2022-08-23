@@ -1,0 +1,29 @@
+{
+	"CONTROLS" :
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		},
+		{ "DEFAULT" : 1, "MAX" : 2, "MIN" : 0, "NAME" : "Slider1", "TYPE" : "slider" },
+		{ "DEFAULT" : 1, "MAX" : 2, "MIN" : 0, "NAME" : "Slider2", "TYPE" : "slider" }
+	],
+	"CREDIT" : "DanielXMoore",
+	"DESCRIPTION" : "Followed some TheArtOfCodeTutorials and ended up with this!",
+	"IMAGE_PATH" : "starleidoscope.png",
+	"TITLE" : "Starleidoscope"
+}

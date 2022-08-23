@@ -1,0 +1,27 @@
+{
+	"CONTROLS" :
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseXY",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "mrange",
+	"DESCRIPTION" : "CC0: Truchet + Kaleidoscope FTW\nBit of experimenting with kaleidoscopes and truchet turned out nice\nQuite similar to an earlier shader I did but I utilized a different truchet pattern this time",
+	"IMAGE_PATH" : "truchet_+_kaleidoscope_ftw.png",
+	"TITLE" : "Truchet + Kaleidoscope FTW"
+}

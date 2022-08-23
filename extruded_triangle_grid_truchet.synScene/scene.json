@@ -1,0 +1,61 @@
+{
+	"CONTROLS" :
+	[
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 3,
+			"MIN" : -3,
+			"NAME" : "Camera",
+			"TYPE" : "xy",
+			"UI_GROUP" : "defaults"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Slider1",
+			"TYPE" : "slider"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "Slider2",
+			"TYPE" : "slider"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+			"MIN" : 0,
+            "DEFAULT": 1,
+			"NAME" : "Slider3",
+			"TYPE" : "slider"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 2,
+            "DEFAULT": 1,
+			"MIN" : -2,
+			"NAME" : "Slider4",
+			"TYPE" : "slider"
+		},
+		{
+			"DEFAULT" : 0,
+			"DESCRIPTION" : "",
+			"MAX" : 1,
+			"MIN" : 0,
+			"NAME" : "MouseClick",
+			"TYPE" : "toggle",
+			"UI_GROUP" : "defaults"
+		}
+	],
+	"CREDIT" : "Shane",
+	"DESCRIPTION" : "An extruded triangle grid Truchet variation.",
+	"IMAGE_PATH" : "extruded_triangle_grid_truchet.png",
+	"TITLE" : "Extruded Triangle Grid Truchet"
+}
